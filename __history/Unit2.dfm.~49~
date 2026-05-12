@@ -1,0 +1,299 @@
+object MainForm: TMainForm
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
+  Caption = '451003 '#1050#1083#1080#1084#1080#1085#1090#1080#1086#1085#1072#1082' '#1042#1103#1095#1077#1089#1083#1072#1074' - 11 '#1042#1072#1088#1080#1072#1085#1090
+  ClientHeight = 583
+  ClientWidth = 357
+  Color = clBtnHighlight
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  Menu = MainMenu
+  Position = poDesktopCenter
+  TextHeight = 15
+  object lbTask: TLabel
+    Left = 8
+    Top = 2
+    Width = 209
+    Height = 17
+    Caption = '- '#1062#1080#1092#1088#1086#1074#1072#1103' '#1087#1086#1076#1087#1080#1089#1100' (RSA)'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold, fsItalic, fsUnderline]
+    ParentFont = False
+    WordWrap = True
+  end
+  object lbSrcText: TLabel
+    Left = 8
+    Top = 167
+    Width = 91
+    Height = 15
+    Caption = #1048#1089#1093#1086#1076#1085#1099#1081' '#1092#1072#1081#1083':'
+  end
+  object lbDestText: TLabel
+    Left = 8
+    Top = 443
+    Width = 132
+    Height = 15
+    Caption = #1056#1077#1079#1091#1083#1100#1090#1080#1088#1091#1102#1097#1080#1081' '#1092#1072#1081#1083':'
+  end
+  object lbP: TLabel
+    Left = 8
+    Top = 25
+    Width = 10
+    Height = 15
+    Caption = 'p:'
+  end
+  object lbOpen: TLabel
+    Left = 8
+    Top = 83
+    Width = 93
+    Height = 15
+    Caption = #1054#1090#1082#1088#1099#1090#1099#1081' '#1082#1083#1102#1095':'
+  end
+  object lbQ: TLabel
+    Left = 8
+    Top = 54
+    Width = 10
+    Height = 15
+    Caption = 'q:'
+  end
+  object lbB: TLabel
+    Left = 88
+    Top = 54
+    Width = 10
+    Height = 15
+    Caption = 'd:'
+  end
+  object lbClose: TLabel
+    Left = 183
+    Top = 83
+    Width = 92
+    Height = 15
+    Caption = #1047#1072#1082#1088#1099#1090#1099#1081' '#1082#1083#1102#1095':'
+  end
+  object lbE: TLabel
+    Left = 88
+    Top = 25
+    Width = 9
+    Height = 15
+    Caption = 'e:'
+  end
+  object Label1: TLabel
+    Left = 8
+    Top = 343
+    Width = 28
+    Height = 15
+    Caption = #1069#1062#1055':'
+  end
+  object Label2: TLabel
+    Left = 8
+    Top = 255
+    Width = 94
+    Height = 15
+    Caption = #1061#1101#1096' '#1089#1086#1086#1073#1097#1077#1085#1080#1103':'
+  end
+  object btFile: TButton
+    Left = 183
+    Top = 25
+    Width = 153
+    Height = 44
+    Caption = #1055#1088#1086#1095#1080#1090#1072#1090#1100' '#1089' '#1092#1072#1081#1083#1072
+    TabOrder = 0
+    OnClick = btFileClick
+  end
+  object reSrcText: TRichEdit
+    Left = 8
+    Top = 188
+    Width = 337
+    Height = 61
+    Font.Charset = 254
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    ReadOnly = True
+    ScrollBars = ssVertical
+    TabOrder = 1
+    OnChange = reSrcTextChange
+  end
+  object reDestText: TRichEdit
+    Left = 8
+    Top = 464
+    Width = 327
+    Height = 81
+    Font.Charset = 254
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    ReadOnly = True
+    ScrollBars = ssVertical
+    TabOrder = 2
+  end
+  object edP: TEdit
+    Left = 24
+    Top = 25
+    Width = 57
+    Height = 23
+    MaxLength = 33
+    NumbersOnly = True
+    TabOrder = 3
+  end
+  object btCipher: TButton
+    Left = 8
+    Top = 551
+    Width = 105
+    Height = 25
+    Caption = #1064#1080#1092#1088#1086#1074#1072#1090#1100
+    TabOrder = 4
+    OnClick = btCipherClick
+  end
+  object btRecipher: TButton
+    Left = 119
+    Top = 551
+    Width = 105
+    Height = 25
+    Caption = #1044#1077#1096#1080#1092#1088#1086#1074#1072#1090#1100
+    TabOrder = 5
+    OnClick = btDecipherClick
+  end
+  object btClear: TButton
+    Left = 230
+    Top = 551
+    Width = 105
+    Height = 25
+    Caption = #1054#1095#1080#1089#1090#1080#1090#1100
+    TabOrder = 6
+    OnClick = btClearClick
+  end
+  object reOpenKey: TRichEdit
+    Left = 8
+    Top = 104
+    Width = 169
+    Height = 57
+    Font.Charset = 254
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    ReadOnly = True
+    ScrollBars = ssVertical
+    TabOrder = 7
+  end
+  object edQ: TEdit
+    Left = 24
+    Top = 54
+    Width = 57
+    Height = 23
+    MaxLength = 33
+    NumbersOnly = True
+    TabOrder = 8
+  end
+  object edB: TEdit
+    Left = 104
+    Top = 54
+    Width = 57
+    Height = 23
+    MaxLength = 33
+    NumbersOnly = True
+    TabOrder = 9
+  end
+  object reCloseKey: TRichEdit
+    Left = 183
+    Top = 104
+    Width = 162
+    Height = 57
+    Font.Charset = 254
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    ReadOnly = True
+    ScrollBars = ssVertical
+    TabOrder = 10
+  end
+  object edE: TEdit
+    Left = 104
+    Top = 25
+    Width = 57
+    Height = 23
+    MaxLength = 33
+    NumbersOnly = True
+    TabOrder = 11
+  end
+  object RichEdit1: TRichEdit
+    Left = 8
+    Top = 276
+    Width = 337
+    Height = 61
+    Font.Charset = 254
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    ReadOnly = True
+    ScrollBars = ssVertical
+    TabOrder = 12
+    OnChange = reSrcTextChange
+  end
+  object RichEdit2: TRichEdit
+    Left = 8
+    Top = 364
+    Width = 337
+    Height = 61
+    Font.Charset = 254
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    ReadOnly = True
+    ScrollBars = ssVertical
+    TabOrder = 13
+    OnChange = reSrcTextChange
+  end
+  object MainMenu: TMainMenu
+    Left = 360
+    Top = 8
+    object N1: TMenuItem
+      Caption = #1060#1072#1081#1083
+      object N3: TMenuItem
+        Caption = #1054#1090#1082#1088#1099#1090#1100
+        OnClick = N3Click
+      end
+      object N4: TMenuItem
+        Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
+        OnClick = N4Click
+      end
+      object N5: TMenuItem
+        Caption = '-'
+      end
+      object N6: TMenuItem
+        Caption = #1047#1072#1082#1088#1099#1090#1100
+      end
+    end
+    object N2: TMenuItem
+      Caption = #1048#1085#1089#1090#1088#1091#1082#1094#1080#1103
+    end
+  end
+  object OpenTextFileDialog1: TOpenTextFileDialog
+    Left = 360
+    Top = 72
+  end
+  object SaveTextFileDialog1: TSaveTextFileDialog
+    Left = 360
+    Top = 136
+  end
+end
