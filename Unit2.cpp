@@ -57,7 +57,8 @@ const std::wstring ERR[] = { L"",
     L"Error. File not readable. Please try again. ",
     L"Error. File not writable. Please try again. ",
     L"Error. File is empty. Please try again. ",
-    L"Error. The file lacks sufficient information . Please try again. " };
+	L"Error. The file lacks sufficient information . Please try again. "
+};
 
 std::wstring __fastcall getExtension(
     const std::wstring &str, const int posStart, const int posEnd)
@@ -253,10 +254,10 @@ void __fastcall TMainForm::btFileClick(TObject* Sender)
             //fileName.open(pathToFile, std::ios::binary);
             error = isFileReadable(fileName);
         }
-        if ((error == CORRECT) &&
-            fileName.peek() == std::ifstream::traits_type::eof()) {
-            error = FILE_IS_EMPTY;
-        }
+		//if ((error == CORRECT) &&
+			//fileName.peek() == std::ifstream::traits_type::eof()) {
+			//error = FILE_IS_EMPTY;
+        //}
 		if (error == CORRECT) {
 			reSrcText->Text = "";
 			reHash->Text = "";
@@ -363,7 +364,7 @@ void __fastcall TMainForm::btCipherClick(TObject* Sender)
 			L"e, f(r) - не взаимно простые", L"Ошибка!", MB_OK | MB_ICONWARNING);
 	}
 
-	if (reSrcText->Text.Length() != 0 && error == CORRECT) {
+	if (error == CORRECT) {
 		extended_gcd(e, fr, x, y);
 		int d = x;
 		reOpenKey->Lines->Text = "r = " + IntToStr(r) + "\ne = " + IntToStr(e);
@@ -388,11 +389,15 @@ void __fastcall TMainForm::btCipherClick(TObject* Sender)
 		binaryStr = printIntArr(res, size + 1);
 		reHash->Lines->Text = binaryStr;
 		reENS->Lines->Text = IntToStr(S);
+		String ENC = "";
+		ENC += IntToStr(S);
 		int curSize = size;
 		src = resizeArray(src, size);
 		size = curSize;
-        for (int i = 0; i < 4; i++){
-			src[size] = ((S >> (8 * i)) & 0xFF);
+		int len = ENC.Length();
+		for (int i = 0; i < len; i++){
+			//src[size] = ((S >> (8 * i)) & 0xFF);
+            src[size] = ENC[i + 1];
 			size++;
 		}
 	} else if (error == CORRECT){
@@ -446,27 +451,50 @@ void __fastcall TMainForm::btDecipherClick(TObject* Sender)
 		char ch;
 		int num = 0;
 		int c = 0;
-
-		res = new int[size + 1 - 4];
+        res = new int[size + 1];
 		res[0] = 100;
-		for (int j = 0; j < size - 4; j++) {
-			ch = src[j];
-			num = ch & 0xff;
-			c = ((res[j] + num) * (res[j] + num)) % r;
-            res[j + 1] = c;
-			num = 0;
+
+		String ENC = "";
+		if (size > 4) {
+			for (int i = size - 4; i < size; i++){
+				if (src[i] >= '0' && src[i] <= '9') {
+					ENC += src[i];
+				}
+			}
+
+			for (int j = 0; j < size - ENC.Length(); j++) {
+				ch = src[j];
+				num = ch & 0xff;
+				c = ((res[j] + num) * (res[j] + num)) % r;
+				res[j + 1] = c;
+				num = 0;
+			}
+		} else {
+			int j = 0;
+			for (int i = 0; i < size; i++){
+				if (src[i] >= '0' && src[i] <= '9') {
+					ENC += src[i];
+				} else {
+					ch = src[i];
+					num = ch & 0xff;
+					c = ((res[j] + num) * (res[j] + num)) % r;
+					res[j + 1] = c;
+					num = 0;
+					j++;
+                }
+			}
+			//binaryStr += printIntArr(res, j + 1);
+
 		}
-		num = 0;
-		for (int i = size - 4; i < size; i++) {
-			ch = src[i];
-			num += ((ch & 0xFF) << (8*(i - size)));
-		}
+		num = StrToInt(ENC);
+
 		int S = modular_pow(num, e, r);
 
 		String binaryStr = "";
-		binaryStr = printIntArr(res, size + 1 - 4);
+		binaryStr += printIntArr(res, size - ENC.Length() + 1);
 		reHash->Lines->Text = binaryStr;
 		reENS->Lines->Text = IntToStr(num);
+
         if (S != c) {
 			Application->MessageBox(
 				L"Цифровая подпись не верна!", L"Ошибка!", MB_OK | MB_ICONWARNING);
@@ -474,6 +502,7 @@ void __fastcall TMainForm::btDecipherClick(TObject* Sender)
             Application->MessageBox(
 				L"Цифровая подпись верна!", L"Ошибка!", MB_OK | MB_ICONWARNING);
 		}
+        size = size - 4;
 
 	} else if (error == CORRECT){
 		Application->MessageBox(
